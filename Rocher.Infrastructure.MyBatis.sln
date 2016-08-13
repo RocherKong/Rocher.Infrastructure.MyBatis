@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rocher.Infrastructure.MyBatis", "Rocher.Infrastructure.MyBitis\Rocher.Infrastructure.MyBatis.csproj", "{EAD436D8-3DF2-4728-8448-646C1576E769}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rocher.Infrastructure.MyBatis", "Rocher.Infrastructure.MyBatis\Rocher.Infrastructure.MyBatis.csproj", "{EAD436D8-3DF2-4728-8448-646C1576E769}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{3D458BFE-4766-48CA-ACC5-F792795DD5DC}"
 EndProject

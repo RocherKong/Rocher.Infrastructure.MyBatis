@@ -182,7 +182,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rocher.Infrastructure.MyBitis\Rocher.Infrastructure.MyBatis.csproj">
+    <ProjectReference Include="..\Rocher.Infrastructure.MyBatis\Rocher.Infrastructure.MyBatis.csproj">
       <Project>{ead436d8-3df2-4728-8448-646c1576e769}</Project>
       <Name>Rocher.Infrastructure.MyBatis</Name>
     </ProjectReference>
