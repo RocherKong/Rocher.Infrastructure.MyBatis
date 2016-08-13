@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+*******************************
+// Create By Rocher Kong  
+ Date 2016-04-17 15:06
+*******************************
+-->
+<!--需要设置 SqlNameSpace 一般设置为TableName -->
+<sqlMap namespace="T_Administrator" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <alias>
+    <!--设置查询映射表实体-->
+    <typeAlias alias="T_Administrator" type="Test.Entity.T_Administrator,Test" />
+  </alias>
+  <!--缓存策略-->
+  <cacheModels>
+    <cacheModel id="T_Administrator_EntityCache" implementation="MEMORY">
+      <flushInterval hours="24"/>
+      <flushOnExecute statement="T_Administrator.Insert"/>
+      <flushOnExecute statement="T_Administrator.Delete"/>
+      <flushOnExecute statement="T_Administrator.Update"/>
+    </cacheModel>
+  </cacheModels>
+  <statements>
+    <!--公共查询参数片段-->
+    <sql id="QueryParams">
+      Where T.IsDelete=0
+    </sql>
+
+    <!--新增-->
+    <insert id="Insert" parameterClass="T_Administrator">
+      INSERT INTO T_Administrator
+      (Name
+      ,Age
+      ,LoginName
+      ,Password)
+      VALUES
+      (#Name#
+      ,#Age#
+      ,#LoginName#
+      ,#Password#)
+      <selectKey property="Id" type="post" resultClass="long">
+        Select @@IDENTITY
+      </selectKey>
+    </insert>
+
+    <!--逻辑删除-->
+    <update id="Delete" parameterClass="Hashtable">
+      UPDATE T_Administrator
+      SET IsDelete=1 Where Id=#Id#
+    </update>
+
+    <!--逻辑删除-->
+    <update id="DeleteList" parameterClass="Hashtable">
+      UPDATE T_Administrator
+      SET IsDelete=1 Where Id
+      <iterate prepend="In" property="Ids" open="(" close=")" conjunction=",">#Ids[]#</iterate>
+    </update>
+
+    <!--更新-->
+    <update id="Update" parameterClass="T_Administrator">
+      UPDATE T_Administrator
+      SET
+      Name = #Name#
+      ,Age = #Age#
+      ,LoginName = #LoginName#
+      ,Password = #Password#
+      WHERE Id=#Id#
+    </update>
+
+    <!--获取数据列-->
+    <select id="GetList" parameterClass="Hashtable" resultClass="T_Administrator">
+      SELECT T.* From T_Administrator T
+      <include refid="QueryParams"/>
+      Order By T.Id DESC
+    </select>
+
+    <!--获取分页数据-->
+    <select id="GetListByPage" parameterClass="Hashtable" resultClass="T_Administrator">
+      Select * From (Select ROW_NUMBER() Over(Order By T.Id DESC) Row_Index,T.*
+      From T_Administrator T
+      <include refid="QueryParams"/>
+      ) TT
+      Where TT.Row_Index Between ((#PageIndex#-1)*#PageSize#+1) And (#PageIndex#*#PageSize#)
+    </select>
+
+    <!--获取记录数-->
+    <select id="GetRecord" parameterClass="Hashtable" resultClass="int">
+      Select Count(1) From T_Administrator T
+      <include refid="QueryParams"/>
+    </select>
+
+    <!--获取表映射实体-->
+    <select id="GetEntity" parameterClass="Hashtable" resultClass="T_Administrator">
+      Select Top 1 T.* From T_Administrator T
+      Where T.IsDelete=0
+      <isNotEmpty prepend="And" property="Id">
+        T.Id=#Id#
+      </isNotEmpty>
+    </select>
+
+    <!--是否存在该记录-->
+    <select id="IsExist"  parameterClass="Hashtable" resultClass="int">
+      Select Count(1) From T_Administrator T
+      <include refid="QueryParams"/>
+    </select>
+
+    <!--获取前N行数据-->
+    <select id="GetTop" parameterClass="Hashtable" resultClass="T_Administrator">
+      Select Top (#Num#) * From T_Administrator T
+      <include refid="QueryParams"/>
+    </select>
+  </statements>
+</sqlMap>
