@@ -159,9 +159,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="SqlMap.config" />
     <Content Include="providers.config" />
     <Content Include="Views\_ViewStart.cshtml" />
